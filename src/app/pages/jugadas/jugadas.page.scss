@@ -1,0 +1,15 @@
+.centerAll{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.centerAllLeft{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.centerAllRigth{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

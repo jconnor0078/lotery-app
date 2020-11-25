@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -18,9 +17,9 @@ export class AppComponent implements OnInit {
       icon: 'mail'
     },
     {
-      title: 'Outbox',
-      url: '/folder/Outbox',
-      icon: 'paper-plane'
+      title: 'Venta',
+      url: '/pages/Venta',
+      icon: 'ticket'
     },
     {
       title: 'Favorites',
@@ -64,6 +63,11 @@ export class AppComponent implements OnInit {
     const path = window.location.pathname.split('folder/')[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+    }else{
+      let pathl= window.location.pathname.split('pages/')[1];
+      if(pathl){
+        this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === pathl.toLowerCase());
+      }
     }
   }
 }

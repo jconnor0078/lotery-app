@@ -1,0 +1,138 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  *ngIf="loanding">
+  <div
+  style="display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;">
+    <ion-spinner></ion-spinner>
+  </div>
+</ion-content> 
+<ion-content  *ngIf="!loanding">
+ 
+    <ion-grid [fixed]="true" style="height: 13.8%;">
+      
+      <ion-row>
+        <ion-col size="9"> 
+          <div 
+          (click)="selectElement('N')"
+          class="displayLabel" 
+          [style.border]="itemSelected==='fieldN'?'2px solid #92949c':''" 
+          [style.background-color]="itemSelected==='fieldN'?'#3880ff':''"><span>{{valueN}}</span></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button  (click)="selectElement('N')" class="btnKeyBoard" color="light" >N</ion-button></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="9"> 
+          <div 
+          (click)="selectElement('M')"
+          class="displayLabel" 
+          [style.border]="itemSelected==='fieldM'?'2px solid #92949c':''" 
+          [style.background-color]="itemSelected==='fieldM'?'#3880ff':''"><span class="displayLabel">${{valueM}}</span></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button  (click)="selectElement('M')"  class="btnKeyBoard" color="light">M</ion-button></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="9"> 
+          <div><span class="displayLabel">Total: $ {{totalM}}</span></div>
+        </ion-col>
+        <ion-col size="3"> 
+          <div><ion-button class="btnKeyBoard" color="primary">DISP</ion-button></div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3"> 
+          <div><ion-button (click)="presentModal()" class="btnKeyBoard" color="primary">JU</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="addPaleAutoGenerados()" class="btnKeyBoard" color="primary">GP</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="addTripleatasAutoGenerados()" class="btnKeyBoard" color="primary">GT</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presentModalLoteriaDispSuperPale()" class="btnKeyBoard" color="primary">SP</ion-button></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="3"> 
+          <div><ion-button (click)="presKey(7)" class="btnKeyBoard" color="light">7</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presKey(8)"  class="btnKeyBoard" color="light">8</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presKey(9)"  class="btnKeyBoard" color="light">9</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presentModalLoteriaDisp()" class="btnKeyBoard" color="medium">L</ion-button></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="3"> 
+          <div><ion-button (click)="presKey(4)"  class="btnKeyBoard" color="light">4</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presKey(5)"  class="btnKeyBoard" color="light">5</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presKey(6)"  class="btnKeyBoard" color="light">6</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button class="btnKeyBoard" color="medium">RP</ion-button></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="3"> 
+          <div><ion-button (click)="presKey(1)"  class="btnKeyBoard" color="light">1</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presKey(2)"  class="btnKeyBoard" color="light">2</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presKey(3)"  class="btnKeyBoard" color="light">3</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presKey(-1)"  class="btnIcons" color="medium"><ion-icon name="arrow-back-outline"></ion-icon></ion-button></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="3"> 
+          <div><ion-button (click)="presKey(0)"  class="btnKeyBoard" color="light">0</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="presentCopiarTicket()" class="btnKeyBoard" color="medium">CT</ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="pressPrinter()" class="btnIcons" color="medium"><ion-icon name="print-outline"></ion-icon></ion-button></div>
+        </ion-col>
+        <ion-col> 
+          <div><ion-button (click)="pressE()" class="btnKeyBoard" color="medium">E</ion-button></div>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+    
+ 
+  
+</ion-content>

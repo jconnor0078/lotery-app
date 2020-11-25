@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Loterias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+ 
+  <ion-list>
+    <ion-list-header>Loterias</ion-list-header>
+      <ion-item *ngFor="let item of loteriasDisponibles">
+        <ion-checkbox color="danger" (ionChange)="on_change(item)" checked={{item.selected}} slot="start"></ion-checkbox>
+        <ion-label>{{item.name}}</ion-label>
+      </ion-item>
+    </ion-list>
+ 
+  <ion-button (click)="dismiss()" expand="block">Volver atras</ion-button>
+ 
+</ion-content>

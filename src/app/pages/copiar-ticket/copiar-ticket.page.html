@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Copiar Ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  *ngIf="buscando">
+  <div
+  style="display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;">
+    <ion-spinner>Buscando...</ion-spinner>
+  </div>
+</ion-content> 
+<ion-content class="ion-padding" *ngIf="!buscando" >
+  <ion-list lines="full" class="ion-no-margin">
+    <ion-item>
+      <ion-label position="floating">Ingrese el codigo del ticket</ion-label>
+      <ion-input
+        type="number"
+        pattern="\d*"
+        [(ngModel)]="noTicket"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="dismiss()" expand="block">Lectura</ion-button>
+  <ion-button (click)="onBuscar()" expand="block">Buscar</ion-button>
+  <ion-button (click)="dismiss()" expand="block">Cancelar</ion-button>
+ 
+</ion-content>
