@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import {
   ENDPOINT_CREATE_TICKET,
   ENDPOINT_GET_TICKET_BY_CODE,
+  ENDPOINT_CANCEL_TICKET_BY_CODE,
 } from "../../../config/app-config";
 
 @Injectable({
@@ -19,6 +20,13 @@ export class JugadasService {
   buscarTicketPorCodigo(noTicket: number): Observable<any> {
     return this.http.get(
       ENDPOINT_GET_TICKET_BY_CODE.concat(noTicket.toString())
+    );
+  }
+
+  anularTicketPorCodigo(noTicket: number): Observable<any> {
+    return this.http.post(
+      ENDPOINT_CANCEL_TICKET_BY_CODE,
+      JSON.stringify({ ticketCode: noTicket })
     );
   }
 }

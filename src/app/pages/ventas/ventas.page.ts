@@ -8,7 +8,7 @@ import { ActivatedRoute } from "@angular/router";
 import { JugadasPage } from "../jugadas/jugadas.page";
 import { LoteriasDisponiblesPage } from "../loterias-disponibles/loterias-disponibles.page";
 import { LoteriasDispParaSuperPalePage } from "../loterias-disp-para-super-pale/loterias-disp-para-super-pale.page";
-import {CopiarTicketPage} from '../copiar-ticket/copiar-ticket.page';
+import { CopiarTicketPage } from "../copiar-ticket/copiar-ticket.page";
 import { PantallasService } from "../../services/pantallas/pantallas.service";
 import { JugadasService } from "../../services/jugadas/jugadas.service";
 
@@ -40,21 +40,35 @@ export class VentasPage implements OnInit {
 
   ngOnInit() {
     this.title = this.activatedRoute.snapshot.paramMap.get("id");
-    this.loanding = false;
     console.log("Buscando info de pantalla 1");
-    this.pantallasService.getScreenData(this.screenId).subscribe((response) => {
-      console.log("Resultado de info de pantalla 1", response);
-      if (response && response.status === "OK") {
-        if (response.data.loteries && response.data.loteries.length > 0) {
-          response.data.loteries.forEach((element) => {
-            this.loteriasDisponibles.push({_id: element._id, name: element.name, selected: false});
-            this.loteriasDisponiblesParaSuperPale.push({_id: element._id, name: element.name, selected: false});
-          });
+    this.pantallasService.getScreenData(this.screenId).subscribe(
+      (response) => {
+        console.log("Resultado de info de pantalla 1", response);
+        if (response && response.status === "OK") {
+          if (response.data.loteries && response.data.loteries.length > 0) {
+            response.data.loteries.forEach((element) => {
+              this.loteriasDisponibles.push({
+                _id: element._id,
+                name: element.name,
+                selected: false,
+              });
+              this.loteriasDisponiblesParaSuperPale.push({
+                _id: element._id,
+                name: element.name,
+                selected: false,
+              });
+            });
+          }
+          this.loanding = false;
+          //this.loteriasDisponibles = loteriasAux;
+          //this.loteriasDisponiblesParaSuperPale = loteriasAux;
         }
-        //this.loteriasDisponibles = loteriasAux;
-        //this.loteriasDisponiblesParaSuperPale = loteriasAux;
+      },
+      async () => {
+        await this.presentAlert("Ha ocurrido un problema con la aplicación, favor intentarlo mas tarde.");
+        this.loanding= false;
       }
-    });
+    );
   }
 
   async presentModal() {
@@ -638,17 +652,23 @@ export class VentasPage implements OnInit {
     console.log("Guardando jugada...", objToCreateTicket);
 
     this.loanding = true;
-    this.jugadasService.createTicket(objToCreateTicket).subscribe((response) => {
-      console.log("Resultado del guardado", response);
-      this.loanding = false;
-      if (response && response.status === "OK") {
-        this.limpiarJugadas();
-        this.presentAlert("se agrego el ticket");
-      }else{
-        this.presentAlert(response.message);
-        return;
-      }
-    });
+    this.jugadasService
+      .createTicket(objToCreateTicket)
+      .subscribe((response) => {
+        console.log("Resultado del guardado", response);
+        this.loanding = false;
+        if (response && response.status === "OK") {
+          this.limpiarJugadas();
+          this.presentAlert("se agrego el ticket");
+        } else {
+          this.presentAlert(response.message);
+          return;
+        }
+      },
+      async () => {
+        await this.presentAlert("Ha ocurrido un problema con la aplicación, favor intentarlo mas tarde.");
+        this.loanding= false;
+      });
 
     console.log("jugadas", this.jugadas);
     console.log(
@@ -659,8 +679,13 @@ export class VentasPage implements OnInit {
     console.log("loterias super pale", this.loteriasDisponiblesParaSuperPale);
   }
 
-  private getObjectToCreateTicket(){
-    let obj={loteryPlays:[],amountTotal:0,lotteries:[], superPaleLotteries:[] };
+  private getObjectToCreateTicket() {
+    let obj = {
+      loteryPlays: [],
+      amountTotal: 0,
+      lotteries: [],
+      superPaleLotteries: [],
+    };
     obj.loteryPlays = this.prepareDataPlaysLoteriesToSend();
     obj.amountTotal = this.totalM;
     obj.lotteries = this.prepareDataLoteriesToSend();
@@ -671,7 +696,7 @@ export class VentasPage implements OnInit {
   private prepareDataPlaysLoteriesToSend() {
     let res = [];
     this.jugadas.forEach((element) => {
-      let obj={type:'',num:'',amount:0};
+      let obj = { type: "", num: "", amount: 0 };
       obj.type = element.tipo;
       obj.num = element.num;
       obj.amount = element.monto;
@@ -704,14 +729,14 @@ export class VentasPage implements OnInit {
     return res;
   }
 
-  private limpiarJugadas(){
-    if(this.loteriasDisponibles.length>0){
-      this.loteriasDisponibles.forEach(element => {
-        element.selected =false;
+  private limpiarJugadas() {
+    if (this.loteriasDisponibles.length > 0) {
+      this.loteriasDisponibles.forEach((element) => {
+        element.selected = false;
       });
     }
-    if(this.loteriasDisponiblesParaSuperPale.length>0){
-      this.loteriasDisponiblesParaSuperPale.forEach(element => {
+    if (this.loteriasDisponiblesParaSuperPale.length > 0) {
+      this.loteriasDisponiblesParaSuperPale.forEach((element) => {
         element.selected = false;
       });
     }
@@ -722,23 +747,23 @@ export class VentasPage implements OnInit {
   async presentCopiarTicket() {
     this.loanding = true;
     const modal = await this.modalController.create({
-      component: CopiarTicketPage
+      component: CopiarTicketPage,
     });
 
     await modal.present();
 
     const { data } = await modal.onDidDismiss();
 
-    if(data!=null){
-      this.setJugadaCopiada(data)
+    if (data != null) {
+      this.setJugadaCopiada(data);
     }
     this.loanding = false;
   }
 
-  setJugadaCopiada(data:any):void{
-    if(data.loteryPlays && data.loteryPlays.length>0){
+  setJugadaCopiada(data: any): void {
+    if (data.loteryPlays && data.loteryPlays.length > 0) {
       this.limpiarJugadas();
-      data.loteryPlays.forEach(element => {
+      data.loteryPlays.forEach((element) => {
         this.addJugada(
           {
             tipo: element.type,

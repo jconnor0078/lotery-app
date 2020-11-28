@@ -4,15 +4,11 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'pages/Venta',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
-  {
-    path: 'pages/:id',
+    path: 'pages/Venta',
     loadChildren: () => import('./pages/ventas/ventas.module').then( m => m.VentasPageModule)
   },
   {
@@ -30,6 +26,14 @@ const routes: Routes = [
   {
     path: 'copiar-ticket',
     loadChildren: () => import('./pages/copiar-ticket/copiar-ticket.module').then( m => m.CopiarTicketPageModule)
+  },
+  {
+    path: 'pages/reporte-resumen-venta',
+    loadChildren: () => import('./pages/reporte-resumen-venta/reporte-resumen-venta.module').then( m => m.ReporteResumenVentaPageModule)
+  },
+  {
+    path: 'pages/anular-ticket',
+    loadChildren: () => import('./pages/anular-ticket/anular-ticket.module').then( m => m.AnularTicketPageModule)
   }
 ];
 

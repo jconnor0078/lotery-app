@@ -25,6 +25,7 @@ export class LoteriasDisponiblesPage implements OnInit {
   }
 
   on_change(item){
+ 
     item.selected=!item.selected;
   }
 
