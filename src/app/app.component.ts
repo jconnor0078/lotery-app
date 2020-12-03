@@ -17,6 +17,11 @@ export class AppComponent implements OnInit {
       icon: 'ticket'
     },
     {
+      title: 'Pagar Ticket',
+      url: '/pages/pagar-ticket',
+      icon: 'cash'
+    },
+    {
       title: 'Anular Ticket',
       url: '/pages/anular-ticket',
       icon: 'close-circle'

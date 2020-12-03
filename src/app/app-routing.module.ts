@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'pages/anular-ticket',
     loadChildren: () => import('./pages/anular-ticket/anular-ticket.module').then( m => m.AnularTicketPageModule)
+  },
+  {
+    path: 'pages/pagar-ticket',
+    loadChildren: () => import('./pages/pagar-ticket/pagar-ticket.module').then( m => m.PagarTicketPageModule)
   }
 ];
 

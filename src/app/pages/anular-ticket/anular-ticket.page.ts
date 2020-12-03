@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController, AlertController } from "@ionic/angular";
+import { AlertController } from "@ionic/angular";
 import { JugadasService } from "../../services/jugadas/jugadas.service";
 
 @Component({
@@ -10,8 +10,7 @@ import { JugadasService } from "../../services/jugadas/jugadas.service";
 export class AnularTicketPage implements OnInit {
   loanding = false;
   noTicket: number;
-  constructor(
-    private modalController: ModalController,
+  constructor( 
     private alertController: AlertController,
     private jugadasService: JugadasService
   ) {}
@@ -25,7 +24,7 @@ export class AnularTicketPage implements OnInit {
       this.jugadasService.anularTicketPorCodigo(this.noTicket).subscribe(
         async (response) => {
           console.log("Resultado de la anulacion del ticket", response);
-          if (response && response.status === "OK" && response.data) {
+          if (response && response.status === "OK") {
             await this.presentOk("Ticket Anulado!");
           } else {
             await this.presentAlert(

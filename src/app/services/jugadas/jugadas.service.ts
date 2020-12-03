@@ -5,6 +5,8 @@ import {
   ENDPOINT_CREATE_TICKET,
   ENDPOINT_GET_TICKET_BY_CODE,
   ENDPOINT_CANCEL_TICKET_BY_CODE,
+  ENDPOINT_CONSULT_TICKET,
+  ENDPOINT_PAY_TICKET
 } from "../../../config/app-config";
 
 @Injectable({
@@ -26,6 +28,20 @@ export class JugadasService {
   anularTicketPorCodigo(noTicket: number): Observable<any> {
     return this.http.post(
       ENDPOINT_CANCEL_TICKET_BY_CODE,
+      JSON.stringify({ ticketCode: noTicket })
+    );
+  }
+
+  consultarTicket(noTicket: number): Observable<any> {
+    return this.http.post(
+      ENDPOINT_CONSULT_TICKET,
+      JSON.stringify({ ticketCode: noTicket })
+    );
+  }
+
+  pagarTicket(noTicket: number): Observable<any> {
+    return this.http.post(
+      ENDPOINT_PAY_TICKET,
       JSON.stringify({ ticketCode: noTicket })
     );
   }
