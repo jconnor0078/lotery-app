@@ -32,6 +32,11 @@ export class AppComponent implements OnInit {
       icon: 'bar-chart'
     },
     {
+      title: 'Cuadre Ventas',
+      url: '/pages/cuadre-ventas',
+      icon: 'cube'
+    },
+    {
       title: 'Salir',
       url: '/',
       icon: 'log-out'

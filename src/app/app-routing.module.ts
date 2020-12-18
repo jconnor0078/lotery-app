@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'pages/pagar-ticket',
     loadChildren: () => import('./pages/pagar-ticket/pagar-ticket.module').then( m => m.PagarTicketPageModule)
+  },
+  {
+    path: 'pages/cuadre-ventas',
+    loadChildren: () => import('./pages/cuadre/cuadre.module').then( m => m.CuadrePageModule)
   }
 ];
 

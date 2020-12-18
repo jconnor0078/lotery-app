@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cuadre Ventas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  *ngIf="loanding">
+  <div
+  style="display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;">
+    <ion-spinner>Cargando...</ion-spinner>
+  </div>
+</ion-content> 
+
+<ion-content class="ion-padding" *ngIf="!loanding" >
+  <ion-list>
+    <ion-list-header style="font-size: 20px;font-weight: bold;">
+      Info del cuadre anterior
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-label>Monto Pendiente</ion-label>
+      <ion-note slot="end" style ="font-size: 18px;" color="danger">{{montoPendiente}}</ion-note>
+    </ion-item>
+
+   
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header style="font-size: 20px;font-weight: bold;">
+      Resumen de Venta
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Venta de loterias</ion-label>
+      <ion-note slot="end" style ="font-size: 18px;" color="primary">{{ventaLoteria}}</ion-note>
+    </ion-item>
+
+   
+    <ion-item>
+      <ion-label>Monto Perdida</ion-label>
+      <ion-note slot="end" style ="font-size: 18px;" color="danger">{{montoPerdida}}</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Total a entregar</ion-label>
+      <ion-note slot="end" style ="font-size: 18px;" color="primary">{{totalEntrega }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-button (click)="onRefresh()"  expand="block">Refrescar</ion-button>
+  <ion-button (click)="onCuadrar()" expand="block">Cuadrar</ion-button> 
+</ion-content>

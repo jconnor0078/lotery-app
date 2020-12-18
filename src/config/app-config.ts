@@ -17,3 +17,7 @@ export const ENDPOINT_PAY_TICKET = `${ENDPOINT_BASE_SERVICES}/tickets/pay-ticket
 
 //Reports
 export const ENDPOINT_REPORT_SALES_SUMMARY = `${ENDPOINT_BASE_SERVICES}/reports/sales-summary/`;
+
+//Cuadrar
+export const ENDPOINT_CUADRAR_GETINFO = `${ENDPOINT_BASE_SERVICES}/squares/get-square`;
+export const ENDPOINT_CREATE_CUADRAR_GETINFO = `${ENDPOINT_BASE_SERVICES}/squares/create-square`;
